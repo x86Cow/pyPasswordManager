@@ -1,4 +1,7 @@
-def helloWorld():
-    print("Hello World")
+import string
+import random
 
-helloWorld()
+def passwordGen(i):
+  randomStr =   ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(i))
+  print(randomStr)
+passwordGen(20)
