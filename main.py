@@ -2,6 +2,7 @@ import string
 import random
 import base64
 import argparse
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-g", nargs='+', help="generate password")
@@ -29,8 +30,11 @@ def password_save(password_hash, label):
 
 def password_open():
     'Get password from file'
-    with open(PASSWORD_FILE, 'r', encoding='utf-8') as pass_file:
-        return pass_file.read()
+    if os.path.exists(PASSWORD_FILE):
+        with open(PASSWORD_FILE, 'r', encoding='utf-8') as pass_file:
+            return pass_file.read()
+    else:
+        return "--NO-PASSWORDS-HAVE-BEEN-SAVED--"
 
 
 if args.g:
