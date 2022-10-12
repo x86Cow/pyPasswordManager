@@ -4,7 +4,7 @@ import base64
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-g", default=0, help="generate password", type=int)
+parser.add_argument("-g", nargs='+', help="generate password")
 parser.add_argument("-o", action='store_true', help="view passwords")
 parser.parse_args()
 args = parser.parse_args()
@@ -34,6 +34,9 @@ def password_open():
 
 
 if args.g:
-    password_save(password_gen(args.g), LABEL)
+    if len(args.g) == 1:
+        password_save(password_gen(8), args.g[0])
+    else:
+        password_save(password_gen(int(args.g[1])), args.g[0])
 if args.o:
     print(password_open())
